@@ -22,8 +22,9 @@
     ]
   },
   "dependencies": {
-    "@emotion/react": "^11.7.1",
-    "@emotion/styled": "^11.6.0",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/material": "^5.11.14",
     "formik": "^2.2.9",
     "lodash": "^4.17.21",
     "next": "^13.0.5",
