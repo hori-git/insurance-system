@@ -1,0 +1,9 @@
+/node_modules
+/.eslintrc.js
+/.babelrc.js
+/jest.config.js
+/next.config.js
+/out
+/jest-setup.js
+/tsconfig.tsbuildinfo
+/e2e_test

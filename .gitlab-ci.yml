@@ -1,0 +1,48 @@
+stages:
+  - lint_check
+  - build
+  # - deploy
+
+image: node:18.12.1
+
+lint_check:
+  stage: lint_check
+  script:
+    - npm config set @hori:registry=https://gitlab.com/api/v4/projects/34074723/packages/npm/
+    - npm config set //gitlab.com/api/v4/projects/34074723/packages/npm/:_authToken=$CI_JOB_TOKEN
+    - yarn install
+    - echo lint start
+    - yarn lint
+  cache:
+    paths:
+      - node_modules
+      - .eslintcache
+
+build:
+  stage: build
+  script:
+    - npm config set @hori:registry=https://gitlab.com/api/v4/projects/34074723/packages/npm/
+    - npm config set //gitlab.com/api/v4/projects/34074723/packages/npm/:_authToken=$CI_JOB_TOKEN
+    - yarn install
+    - yarn build
+  cache:
+    paths:
+      - node_modules
+  artifacts:
+    paths:
+      - out/
+    expire_in: 1 h
+# deploy:
+#   image: python:alpine
+#   stage: deploy
+#   cache:
+#     paths:
+#       - out/
+#   dependencies:
+#     - build
+#   script:
+#     - apk add python3-dev
+#     - pip3 install awscli
+#     - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+#     - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+#     - aws s3 sync out/ s3://playground-front-hori
